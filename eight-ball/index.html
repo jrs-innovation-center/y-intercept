@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" href="//unpkg.com/tachyons@latest">
+      <link rel="stylesheet" href="style.css">
+    </head>
+
+      <img id="eightBall" onclick="predictTheFuture()" src="https://images.onlinelabels.com/images/clip-art/lemmling/lemmling_8ball.png" class="pl5 animated fadeIn">
+
+     <div id="theFuture" class="mw5 mw7-ns center bg-light-gray pa3 ph4-ns baskerville fw4 f3 lh-copy tc"></div>
+
+<script>
+  document.getElementById('eightBall')
+    .addEventListener('click', function() {
+      document.getElementById('theFuture')
+        .innerHTML = predictTheFuture()
+           }
+         )
+
+  var answers = [
+    'It is certain',
+    'It is decidedly so',
+    'Without a doubt',
+    'Yes, definitely',
+    'You may rely on it',
+    'As I see it, yes',
+    'Most likely',
+    'Outlook good',
+    'Yes',
+    'Signs point to yes',
+    'Reply hazy try again',
+    'Ask again later',
+    'Better not tell you now',
+    'Cannot predict now',
+    'Concentrate and ask again',
+    'Don\'t count on it',
+    'My reply is no',
+    'My sources say no',
+    'Outlook not so good',
+    'Very doubtful'
+  ]
+
+  function getRando(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1)) + min;
+  }
+
+  function predictTheFuture()  {
+    return answers[getRando(0,19)]
+  }
+</script>
+</body>

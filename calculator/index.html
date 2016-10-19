@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+  <head>
+      <link rel="stylesheet" href="style.css">
+    </head>
+<h1>Calculator</h1>
+<body>
+  <div class="terminal">
+    <input type="text" id="input" class="inputBox">
+  </div>
+<section class="row">
+  <div class="column">
+    <button class="button" onclick="press(7)">7</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(8)">8</button>
+  </div>
+  <div class="column">
+   <button class="button" onclick="press(9)">9</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(' / ')">/</button>
+  </div>
+</section>
+  <section class="row">
+  <div class="column">
+    <button class="button" onclick="press(4)">4</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(5)">5</button>
+  </div>
+  <div class="column">
+   <button class="button" onclick="press(6)">6</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(' * ')">*</button>
+  </div>
+</section>
+  <section class="row">
+  <div class="column">
+    <button class="button" onclick="press(1)">1</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(2)">2</button>
+  </div>
+  <div class="column">
+   <button class="button" onclick="press(3)">3</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(' - ')">-</button>
+  </div>
+</section>
+  <section class="row">
+  <div class="column">
+    <button class="button" onclick="press(0)">0</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="clearInput()">AC</button>
+  </div>
+  <div class="column">
+   <button class="button" onclick="calcInput()">=</button>
+  </div>
+  <div class="column">
+    <button class="button" onclick="press(' + ')">+</button>
+  </div>
+</section>
+
+
+<script>
+  var input = document.getElementById('input')
+
+  function press (v) {
+    input.value += v
+  }
+
+  function clearInput () {
+    input.value = ''
+  }
+
+  function calcInput ()  {
+    input.value = doCalculate(calculate, 0, input.value)
+
+  }
+
+  function doCalculate(calc, start, list) {
+    var result = start
+    for (var i = 0; i < list.length; i++) {
+       result = calc(result, list[i])
+      }
+    return result
+  }
+
+  function isOperator(v)  {
+    if (['+', '-', '*', '/'].indexOf(v) > -1) {
+      return true
+    }
+    return false
+  }
+
+  function isFunction (fn)  {
+    if (typeof fn === 'function')  {
+      return true
+    }
+    return false
+  }
+
+  function calculate (a, b)  {
+    var op
+    if (!isOperator(a) && isOperator(b))  {
+      var n1 = parseInt(a, 10)
+
+
+        op = b === '+' ? add : op
+        op = b === '-' ? subtract : op
+        op = b === '*' ? multiply : op
+        op = b === '/' ? divide : op
+
+      return function (v)  {
+        return op(n1, parseInt(v, 10))
+      }
+    }  else if (isFunction(a) && !isOperator(b))  {
+      return a(b)
+    } else if (!isOperator(a) && !isOperator(b)) {
+      return b
+    } else {
+      console.log(a)
+      console.log(b)
+      throw new Error('Does not compute!')
+    }
+  }
+
+
+//   function calculate (exp) {
+//     var a
+//     var op
+//     var result
+//     var ex1array = exp.split(' ')
+
+//     for (var i = 0; i < ex1array.length; i++) {
+//       if (ex1array[i] === '-') {
+//         op = subtract
+//       } else if (ex1array[i] === '+') {
+//         op = add
+//       } else {
+//         // number
+//         if (a === undefined) {
+//           a = parseInt(ex1array[i], 10)
+//         } else {
+//           result = op(a, parseInt(ex1array[i], 10))
+//         }
+//       }
+//     }
+//     a = undefined
+//     op = undefined
+//     return result
+//  }
+
+
+
+  // add function
+     function add (a,b) {
+       return a + b
+     }
+
+  // subtract function
+      function subtract (a,b)  {
+        return a - b
+    }
+
+  // multiply function
+      function multiply (a,b)  {
+        return a * b
+      }
+
+  // divide function
+      function divide (a,b)  {
+        return a / b
+      }
+//   var ex1 = '1 + 1 + 3'
+//   var ex2 = '10 * 5 - 25' //subtract(multiply(10,5), 25)
+//   var ex3 = '100 / (5 + 5) - 1'  //divide(subtract(add(5,5),1),100)
+//   var ex4 = '20 + (40 * 5)'  //add(multiply(40,5),20)
+//   var ex5 = '27 * 42 / 13'  //divide(multiply(27,42),13)
+//   var ex6 = '25 + 32 / 2 + 1000000'  //add(add(divide(32,2),25),1000000)
+//   var a1 = add(add(1,3),1)
+//   var a2 = subtract(multiply(10,5), 25)
+//   var a3 = subtract(divide(100,add(5,5)),1)
+//   var a4 = add(multiply(40,5),20)
+//   var a5 = divide(multiply(27,42),13)
+//   var a6 = add(add(divide(32,2),25),1000000)
+//   console.log(a1)
+//   console.log(a2)
+//   console.log(a3)
+//   console.log(a4)
+//   console.log(a5)
+//   console.log(a6)
+
+</script>
+</body
+</html>

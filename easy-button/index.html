@@ -1,0 +1,25 @@
+<h2>Guess a number between 1 and 10</h2>
+<input type="text" id="bar" placeholder="Give it a shot">
+<button id="easyButton">Guess</button>
+
+<script>
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1)) + min;
+  }
+
+  document.getElementById('easyButton')
+    .addEventListener('click', changeBar)
+
+  var answer = getRandomIntInclusive(1, 10).toString()
+
+  function changeBar (event) {
+    var v = document.getElementById('bar').value
+    if (v === answer)  {
+      alert('Congrats')
+      return
+    }
+    alert('You lose')
+  }
+</script>
